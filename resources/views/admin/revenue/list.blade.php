@@ -22,22 +22,22 @@
                     <div class="form-group col-md-4">
                         <label for="reservation">Người phụ trách</label>
                         <div class="input-group">
-                            <select class="select form-control" name="agency_id">
+                            <select class="select form-control" name="sale_id">
                                 <option value="">-- Tất cả --</option>
                                 @foreach($sales as $sale)
-                                    <option value="{{ $sale->id }}" {{ request('agency_id') == $sale->id ? "selected" : ''}}>{{ $sale->name }}</option>
+                                    <option value="{{ $sale->id }}" {{ request('sale_id') == $sale->id ? "selected" : ''}}>{{ $sale->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="agency_id">Đại lý</label>
+                        <label for="group_id">đại lý</label>
                         <div class="input-group">
-                            <select class="select form-control" name="agency_id">
+                            <select class="select form-control" name="group_id">
                                 <option value="">-- Tất cả --</option>
                                 @foreach($groups as $group)
-                                    <option value="{{ $group->id }}" {{ request('agency_id') == $group->id ? "selected" : ''}}>
-                                        {{ $group->name }}
+                                    <option value="{{ $group->id }}" {{ request('group_id') == $group->id ? "selected" : ''}}>
+                                        {{ $group->group_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -81,7 +81,7 @@
             </div>
         @endif
         <div class="card-header">
-            <h3 class="card-title">Doanh thu theo đại lý </h3>
+            <h3 class="card-title">Doanh thu theo sale </h3>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
@@ -89,7 +89,7 @@
                 <tr>
                     <th style="width: 10px">ID</th>
                     <th>Tên</th>
-                    <th>Nhóm</th>
+                    <th>Đại lý</th>
                     <th>Tổng gd nạp</th>
                     <th>Số tiền nạp</th>
                     <th>Tổng gd rút</th>

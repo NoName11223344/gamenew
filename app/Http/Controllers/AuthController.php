@@ -50,7 +50,7 @@ class AuthController extends Controller
     {
         $user = User::where('user_name', $request->input('user_name'))->first();
 
-        if ($user && Crypt::decrypt($user->password) === $request->input('password') && $user->status == 1 && $user->role == 1) {
+        if ($user && Crypt::decrypt($user->password) === $request->input('password') && $user->status == 1 && in_array($user->role, ['1', '2'])) {
             Auth::login($user);
             return redirect(route('statistical'));
         } else {
@@ -79,8 +79,8 @@ class AuthController extends Controller
         ];
         if(isset($request->sale)){
             $sale = User::where('user_name', $request->sale)->first();
-            $data['agency_id'] = $sale->id;
-            $data['agency_id'] = $sale->agency_id;
+            $data['sale_id'] = $sale->id;
+            $data['group_id'] = $sale->group_id;
         }
 
         $id = $userModel->insertGetId($data);

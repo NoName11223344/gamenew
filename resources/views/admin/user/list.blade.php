@@ -28,7 +28,7 @@
                             <option value="">-- Tất cả --</option>
                             <option value="0" {{ request('role') == '0' ? "selected" : ''}}>Thành viên</option>
                             <option value="1" {{ request('role') == 1 ? "selected" : ''}}>Admin</option>
-                            <option value="2" {{ request('role') == 2 ? "selected" : ''}}>Đại lý</option>
+                            <option value="2" {{ request('role') == 2 ? "selected" : ''}}>Sale</option>
                         </select>
                     </div>
                     <div class="form-group col-md-12">
@@ -51,7 +51,7 @@
                     <th>User Name</th>
                     <th>Mật khẩu</th>
                     <th>Tên</th>
-                    <th>Nhóm</th>
+                    <th>Đại lý</th>
                     <th>Số điện thoại</th>
                     <th>Mức quy đổi</th>
                     <th>Trạng thái</th>
@@ -69,10 +69,10 @@
                     <td>{{ \Illuminate\Support\Facades\Crypt::decrypt($user->password) }}</td>
                     <td>{{ $user->name }}</td>
                     <td>
-                        @if(isset($user->group->name))
-                            <span class="badge badge-success">{{ $user->group->name }}</span>
+                        @if(isset($user->group->group_name))
+                            <span class="badge badge-success">{{ $user->group->group_name }}</span>
                         @else
-                            <span class="badge badge-warning">Chưa có đại lý</span>
+                            <span class="badge badge-warning">Chưa được phân đại lý</span>
                         @endif
                        </td>
                     <td>

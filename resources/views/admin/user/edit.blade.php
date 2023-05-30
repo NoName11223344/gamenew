@@ -59,28 +59,28 @@
                             <select class="select form-control" name="role">
                                 <option value="0" {{ old('role') ?? $user->role == 0 ? "selected='true'" : '' }}>Người dùng</option>
                                 <option value="1" {{ old('role') ?? $user->role == 1 ? "selected='true'" : '' }}>Admin</option>
-                                <option value="2" {{ old('role') ?? $user->role == 2 ? "selected='true'" : '' }}>Đại lý</option>
+                                <option value="2" {{ old('role') ?? $user->role == 2 ? "selected='true'" : '' }}>Sale</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="form-outline">
-                            <label class="form-label" for="sale_id">Đại lý</label>
+                            <label class="form-label" for="sale_id">Sale</label>
                             <select class="select form-control" name="sale_id">
-                                <option value="">-- Chọn đại lý --</option>
+                                <option value="">-- Chọn sale phụ trách --</option>
                                 @foreach($sales as $sale)
-                                    <option value="{{ $sale->id }}" {{ old('sale_id') ?? $user->sale_id == $sale->id ? "selected" : ''}}>{{ $sale->name }} - {{ isset($sale->group->name) ?  $sale->group->name : 'Chưa có đại lý' }}</option>
+                                    <option value="{{ $sale->id }}" {{ old('sale_id') ?? $user->sale_id == $sale->id ? "selected" : ''}}>{{ $sale->name }} - {{ isset($sale->group->group_name) ?  $sale->group->group_name : 'Sale Chưa có đại lý' }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="form-outline">
-                            <label class="form-label" for="agency_id">Đại lý</label>
-                            <select class="select form-control" name="agency_id">
-                                <option value="">-- Chọn Đại lý --</option>
+                            <label class="form-label" for="group_id">Đại lý</label>
+                            <select class="select form-control" name="group_id">
+                                <option value="">-- Chọn đại lý --</option>
                                 @foreach($groups as $group)
-                                    <option value="{{ $group->id }}" {{ old('agency_id') ?? $user->agency_id == $group->id ? "selected" : ''}}>{{ $group->name }}</option>
+                                    <option value="{{ $group->id }}" {{ old('group_id') ?? $user->group_id == $group->id ? "selected" : ''}}>{{ $group->group_name }}</option>
                                 @endforeach
                             </select>
                         </div>

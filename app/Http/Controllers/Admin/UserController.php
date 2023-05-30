@@ -69,8 +69,8 @@ class UserController extends Controller
                 'phone' => $request->phone,
                 'rate' => $request->rate,
                 'role' => $request->role,
-                'agency_id' => $request->agency_id,
-                'agency_id' => $request->agency_id,
+                'sale_id' => $request->sale_id,
+                'group_id' => $request->group_id,
                 'created_at' => new \DateTime(),
             ];
 
@@ -125,8 +125,8 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->rate = $request->rate;
         $user->role = $request->role;
-        $user->agency_id = $request->agency_id;
-        $user->agency_id = $request->agency_id;
+        $user->sale_id = $request->sale_id;
+        $user->group_id = $request->group_id;
         $user->save();
 
         return redirect(route('user.index'))->with(['success', "Cập nhật thành công"]);

@@ -17,7 +17,7 @@
                 <thead>
                 <tr>
                     <th style="width: 10px">ID</th>
-                    <th>Tên nhóm</th>
+                    <th>Tên đại lý</th>
                     <th style="width: 150px">Thao tác</th>
                 </tr>
                 </thead>
@@ -25,7 +25,7 @@
                 @foreach($groups as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $item->name}}</td>
+                        <td>{{ $item->group_name}}</td>
                         <td style="width: 150px">
                             <a href="{{ route('group.edit', ['group' => $item->id]) }}" title="Chỉnh sửa">
                                 <button class="btn btn-primary">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="card card-warning">
         <div class="card-header">
-            <h3 class="card-title">Chỉnh sửa nhóm</h3>
+            <h3 class="card-title">Chỉnh sửa đại lý</h3>
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -20,8 +20,8 @@
                 @csrf
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <label class="form-label" for="name">Tên đại lý</label>
-                        <input type="text" id="name" name="name" class="form-control" value="{{ old('name') ?? $group->name }}">
+                        <label class="form-label" for="group_name">Tên đại lý</label>
+                        <input type="text" id="group_name" name="group_name" class="form-control" value="{{ old('group_name') ?? $group->group_name }}">
                     </div>
                 </div>
                 <div class="col-md-12">

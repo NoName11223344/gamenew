@@ -42,7 +42,7 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $group = Group::insert([
-            'name' => $request->name,
+            'group_name' => $request->group_name,
             'created_at' => new \DateTime()
         ]);
 
@@ -87,7 +87,7 @@ class GroupController extends Controller
     public function update(Request $request, $id)
     {
         $group = Group::find($id);
-        $group->name = $request->name;
+        $group->group_name = $request->group_name;
         $group->save();
 
         return redirect(route('group.index'))->with(['success', "Cập nhật thành công"]);

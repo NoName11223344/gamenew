@@ -6,9 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
+    public $user;
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $this->user = $user;
+            }
+            return $next($request);
+        });
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,6 +48,9 @@ class TransactionController extends Controller
         if (isset($request->type)){
             $transactions = $transactions->where('type', $request->type);
         }
+        if ($this->user->role == User::ROLE_SALE){
+            $transactions = $transactions->where('sale_id', $this->user->id);
+        }
         $transactions = $transactions->orderBy('request_time', 'DESC')
             ->paginate(10);
 
@@ -44,7 +61,8 @@ class TransactionController extends Controller
 
     public function topup(Request $request)
     {
-        $transactions = Transaction::with('user')->where('type', 0)->where('status', "!=", 2);
+        $transactions = Transaction::with('user')->where('type', 0)
+            ->where('status', "!=", 2);
         if ($request->user_name){
             $user = User::where('user_name', $request->user_name)->first();
             $transactions = $transactions->where('user_id', $user->id);
@@ -62,6 +80,9 @@ class TransactionController extends Controller
         if (isset($request->type)){
             $transactions = $transactions->where('type', $request->type);
         }
+        if ($this->user->role == User::ROLE_SALE){
+            $transactions = $transactions->where('sale_id', $this->user->id);
+        }
         $totalTrans = $transactions->count();
         $sumTransAmount = $transactions->sum('amount');
 
@@ -77,8 +98,8 @@ class TransactionController extends Controller
 
     public function withdraw(Request $request)
     {
-        $transactions = Transaction::with('user')->where('type', 1)->where('status', "!=", 2);
-
+        $transactions = Transaction::with('user')->where('type', 1)
+            ->where('status', "!=", 2);
         if ($request->user_name){
             $user = User::where('user_name', $request->user_name)->first();
             $transactions = $transactions->where('user_id', $user->id);
@@ -93,7 +114,9 @@ class TransactionController extends Controller
         if (isset($request->status)){
             $transactions = $transactions->where('status', $request->status);
         }
-
+        if ($this->user->role == User::ROLE_SALE){
+            $transactions = $transactions->where('sale_id', $this->user->id);
+        }
         $totalTrans = $transactions->count();
         $sumTransAmount = $transactions->sum('amount');
 
@@ -125,7 +148,9 @@ class TransactionController extends Controller
         if (isset($request->status)){
             $transactions = $transactions->where('status', $request->status);
         }
-
+        if ($this->user->role == User::ROLE_SALE){
+            $transactions = $transactions->where('sale_id', $this->user->id);
+        }
         $totalTrans = $transactions->count();
         $sumTransAmount = $transactions->sum('amount');
 

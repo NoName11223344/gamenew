@@ -13,6 +13,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected $table = "users";
+    Const ROLE_SALE = 2;
     /**
      * The attributes that are mass assignable.
      *
@@ -40,15 +41,15 @@ class User extends Authenticatable
     }
 
     public function sale(){
-        return $this->hasOne(User::class, 'id', 'agency_id');
+        return $this->hasOne(User::class, 'id', 'sale_id');
     }
 
     public function group(){
-        return $this->hasOne(Group::class, 'id', 'agency_id');
+        return $this->hasOne(Group::class, 'id', 'group_id');
     }
 
 
     public function transactionInCharge(){
-        return $this->hasMany(Transaction::class, 'id', 'agency_id');
+        return $this->hasMany(Transaction::class, 'id', 'sale_id');
     }
 }
