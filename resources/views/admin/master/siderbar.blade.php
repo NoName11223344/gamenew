@@ -13,22 +13,12 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
-
                     <li class="nav-item">
                         <a href="{{ route('statistical') }}"
                            class="nav-link {{ Request::is('admin') ? 'active' : '' }} ">
                             <i class="nav-icon fas fa-home"></i>
                             <p>
                                 Tổng hợp
-                            </p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item has-treeview">
-                        <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('user') ? 'active' : '' }} ">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Danh sách nguời dùng
                             </p>
                         </a>
                     </li>
@@ -42,7 +32,14 @@
                         </a>
                     </li>
                 @endif
-
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('user') ? 'active' : '' }} ">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Danh sách nguời dùng
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview">
                     <a href="{{ route('transaction.index') }}"
                        class="nav-link {{ Request::is('transaction') ? '' : '' }} ">

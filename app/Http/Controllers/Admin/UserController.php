@@ -8,10 +8,23 @@ use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\Group;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
+    public $user;
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $this->user = $user;
+            }
+            return $next($request);
+        });
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +42,9 @@ class UserController extends Controller
         if (isset($request->role)){
             $users = $users->where('role', $request->role);
         }
-
+        if ($this->user->role == User::ROLE_SALE){
+            $users = $users->where('sale_id', $this->user->id);
+        }
         $users = $users->paginate(10);
 
         return view('admin.user.list')->with([
